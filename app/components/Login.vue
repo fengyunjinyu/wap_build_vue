@@ -38,8 +38,11 @@
 
 <script>
 var Vue = require('vue');
+var Router = require('vue-router');
 Vue.use(require('vue-resource'));
-
+var Userstore = require("../store/user.store");
+Vue.use(Router);
+var router = new Router();
 
 export default {
    data:function() {
@@ -55,9 +58,31 @@ export default {
           console.log("Hello")
       },
       submit:function(){
+      var _this = this;
           console.log("submit");
           console.log(this.username);
           console.log(this.password);
+          var data = {
+             username: _this.username,
+             password:_this.password
+
+          }
+
+
+          Userstore.login(
+             data ,
+          function(res){
+              if(res.status){
+                  console.log(res.data);
+                  router.go("/");
+              }
+          },
+          function( err ){
+              console.warn(err);
+          }
+          )
+
+          /*
 
           Vue.http.post(
              'http://localhost/data/user_login',
@@ -75,6 +100,8 @@ export default {
           } ,function ( err ){
           console.warn(err)
           });
+
+          */
 
       },
       changename:function(){

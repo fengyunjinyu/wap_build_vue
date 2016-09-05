@@ -1,13 +1,15 @@
 <template>
   <div class="overline flo">
-     <!--
-     <ul class="overline flo list_nav">
-         <li>  <a v-link="{ path: '/fav' }">fav</a>  </li>
-         <li>  <a v-link="{ path: '/me' }">me</a>  </li>
-     </ul>
-     -->
     <!-- main view -->
     <router-view>
+
+
+         <ul class="overline flo list_nav">
+             <li>  <a v-link="{ path: '/fav' }">fav</a>  </li>
+             <li>  <a v-link="{ path: '/me' }">me</a>  </li>
+         </ul>
+
+
     </router-view>
 
 
@@ -57,10 +59,12 @@ ul.list_nav li a{
    display:inline-block;
    line-height:40px;
    font-size:16px;
-   color:#585858
+   color:#585858;
+   padding:0px 15px;
+   border-bottom:#f5d6d5 solid 2px;
 }
 
-ul.list_nav li a.v-link-active{  color:#ff4657 }
+ul.list_nav li a.v-link-active{  color:#ff4657; border-bottom:#ff4657 solid 2px;}
 
 
 
