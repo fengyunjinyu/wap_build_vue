@@ -10,6 +10,10 @@
          </ul>
 
 
+
+
+
+
     </router-view>
 
 
@@ -47,6 +51,7 @@ ul{
 ul.list_nav{
    display:flex;
    border-bottom:#d1d1d1 solid 1px;
+   background:#f5f6f5;
 }
 
 ul.list_nav li{
