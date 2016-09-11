@@ -6,18 +6,8 @@
 </template>
 
 <script>
-
-import OtherComponent from './other-component.vue';
-
-module.exports={
-   route: {
-       data({ to , next }){
-           var params = {
-               id: to.params.messageId
-           }
-       }
-   },
-   data:function{
+export default {
+   data:function(){
        return {
            message: {}
        }
@@ -27,8 +17,7 @@ module.exports={
            console.log("get more Ajax Data");
        }
 
-   },
-   components:{ OtherComponent }
+   }
 
 }
 </script>

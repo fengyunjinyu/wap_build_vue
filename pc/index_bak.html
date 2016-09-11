@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0,width=device-width">
+    <title>AdminLTE 2 | Dashboard</title>
+
+    <style type="text/css">
+
+        .t_modal_div{
+            background:#f5f6f5;
+            padding:15px;
+        }
+
+        .t_modal{
+            padding:15px 0 0;
+            width:100%;
+            position:relative;
+            float:left;
+            background:#fff;
+            border-radius:10px;
+            overflow:hidden;
+        }
+        .t_modal_head{
+            text-align:center;
+            position:relative;
+            float:left;
+            width:100%;
+            line-height:40px;
+        }
+        .t_modal_content{
+            padding:10px 15px;
+            line-height:30px;
+            font-size:16px;
+            color:#585858;
+            width:100%;
+            float:left;
+            text-align:center
+
+        }
+        .t_modal_foot{
+            width:100%;
+            border-top:#d1d1d1 solid 1px;
+            text-align:center;
+            float:left;
+            text-align:center;
+            font-size:16px;
+            line-height:40px;
+            display:flex
+        }
+        .t_modal_foot .t_modal_btn{
+            flex:1;
+            display:inline-block;
+            border-right:#d1d1d1 solid 1px;
+        }
+
+        .t_modal_foot .t_modal_btn:last-child{
+            border-right:none;
+        }
+
+
+
+    </style>
+
+    <script type="text/javascript" src="../dist/vue.js"></script>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini" style="background: #f5f6f5">
+
+    <div class="wrapper" style="background: #f5f6f5" id="app">
+        {{ message }}
+
+        <hr>
+
+        <button v-on:click="changeTitle()">Demo1</button>
+        <br>
+        <button v-on:click="changeTitle2()">Demo2</button>
+<br>
+        <Modal v-bind:dialog="dialog" >
+        </Modal>
+
+
+    </div>
+
+
+
+
+<script type="text/x-template" id="modal_template">
+    <div class="t_modal_div">
+        <div class="t_modal ">
+            <div class="t_modal_head">
+                <h3 class="t_modal_title">{{ dialog.title }}</h3>
+            </div>
+            <div class="t_modal_content">
+                {{ dialog.content }}
+            </div>
+
+            <div class="t_modal_foot">
+                <a class="t_modal_btn" v-on:click="cancelEvent()">确定</a>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+
+   var vue_Modal = Vue.extend({
+        template:"#modal_template",
+        //父组件传递来的数据的类型验证
+        props:{
+            dialog:Object
+            /*
+            title : String ,
+            content: String,
+            show:Boolean,
+            btn_array:Array
+            */
+        },
+        methods:{
+            /* 取消按钮点击  */
+            cancelEvent:function(){
+                console.log('dojo');
+                this.$dispatch("changeTit" , "from dialog");
+            },
+            confirmEvent:function(){
+                console.log("Confirm");
+            }
+
+        }
+
+    });
+
+   //Vue.component("Modal" , vue_Modal);
+
+
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            dialog:{
+                message:'Hello world',
+               title:'标题1',
+               content:'弹窗内容1',
+               btn_array:[],
+               show:false
+            }
+        },
+        components:{
+            "Modal":vue_Modal
+        },
+        methods:{
+            changeTitle:function(){
+                this.dialog.title="Doline";
+            }
+        },
+        //提供外置扩展
+        events:{
+            "changeTit":function(title){
+                this.dialog.title = title
+                console.log(msg);
+            },
+            "changeContent" : function(content){
+                this.dialog.content=content;
+            },
+            "changeBtns" : function(btns_array){
+                this.dialog.btn_array = btns_array;
+            },
+            "changeButtons" : function(title , content , btns_array){
+                var obj = {}
+                obj.title = title;
+                obj.content = content;
+                obj.btns_array = btns_array;
+                this.dialog = obj;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

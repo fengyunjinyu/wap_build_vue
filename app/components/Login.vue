@@ -37,13 +37,6 @@
 
 
 <script>
-var Vue = require('vue');
-var Router = require('vue-router');
-Vue.use(require('vue-resource'));
-var Userstore = require("../store/user.store");
-Vue.use(Router);
-var router = new Router();
-
 export default {
    data:function() {
       return {
@@ -58,7 +51,7 @@ export default {
           console.log("Hello")
       },
       submit:function(){
-      var _this = this;
+          var _this = this;
           console.log("submit");
           console.log(this.username);
           console.log(this.password);
@@ -68,19 +61,23 @@ export default {
 
           }
 
+          /*
 
-          Userstore.login(
+
+          Userstore.bar(
              data ,
           function(res){
               if(res.status){
                   console.log(res.data);
-                  router.go("/");
+                  //router.go("/");
               }
           },
           function( err ){
               console.warn(err);
           }
           )
+
+          */
 
           /*
 

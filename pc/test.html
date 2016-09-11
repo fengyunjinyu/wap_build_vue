@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="bootstrap/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins -->
+    <link rel="stylesheet" href="bootstrap/css/_all-skins.min.css">
+</head>
+<body>
+<div id="app">
+
+</div>
+
+<script type="text/javascript">
+
+    var Profile = Vue.extend({
+        template:"<p>Hello world</p>"
+    });
+
+    Vue.component("me-profile" , Profile);
+
+    //基础指令
+
+    Vue.directive('demo' , {
+        bind:function(){
+            console.log('demo bound');
+        },
+        update:function(value){
+            this.el.innerHTML = 'name - '       + this.name + '<br>' +
+            'expression - ' + this.expression + '<br>' +
+            'argument - '   + this.arg + '<br>' +
+            'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
+            'value - '      + value
+        }
+    });
+
+    //字面量定义指令
+
+    Vue.directive("dojo" , function(value){
+        console.log(value.color);
+        console.log(value.text);
+    });
+
+    //元素指令
+    Vue.elementDirective("my-directive" , {
+        bind:function(){
+            this.el.style.color="#ff4657";
+            this.el.style.backgroundColor ="#000"
+
+        },
+        update:function(){
+            this.el.innerHTML="Hello demo";
+        },
+        unbind:function(){
+        }
+    });
+
+
+    var mixin = {
+        methods:{
+            foo:function(){
+                console.log("foo");
+            },
+            conflicting:function(){
+                console.log('conflicting');
+            }
+        }
+    };
+
+    var cimponent = new Vue({
+        mixins:[mixin],
+        methods:{
+            bar:function(){
+                console.log('bar');
+            },
+            conflicting:function(){
+                console.log('from self');
+            }
+        }
+    });
+
+
+    var myMixin = {
+        created:function(){
+            this.hello();
+        },
+        methods:{
+            hello:function(){
+                console.log("hello from mixin");
+            }
+        }
+    };
+
+    var Component = Vue.extend({
+        mixins:[myMixin]
+    });
+    var comp = new Component();
+
+    cimponent.bar();
+    cimponent.foo();
+    cimponent.conflicting();
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'Hello Vue.js'
+        }
+    })
+
+
+</script>
+
+</body>
+</html>

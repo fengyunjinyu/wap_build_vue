@@ -1,26 +1,45 @@
 <template>
   <div class="overline flo">
-    <!-- main view -->
-    <router-view>
+      <!-- main view -->
 
 
-         <ul class="overline flo list_nav">
-             <li>  <a v-link="{ path: '/fav' }">fav</a>  </li>
-             <li>  <a v-link="{ path: '/me' }">me</a>  </li>
-         </ul>
+      <router-view>
+      </router-view>
 
 
+      <!--  footer menu   -->
 
+           <ul class="foot_menu overline">
+                 <a v-link="{path:'/invest'}">
+                     <li>
+                        <div class="menu_ico"></div>
+                        <p class="menu_name">invest</p>
+                     </li>
+                 </a>
 
+                 <a v-link="{path:'/account'}">
+                      <li>
+                           <div class="menu_ico"></div>
+                           <p class="menu_name">Account</p>
+                      </li>
+                 </a>
+                  <a v-link="{path:'/activity'}">
+                     <li>
+                         <div class="menu_ico"></div>
+                         <p class="menu_name">Activity</p>
+                     </li>
+                 </a>
 
-
-    </router-view>
-
-
-
-
+           </ul>
   </div>
 </template>
+
+<script>
+
+
+
+
+</script>
 
 <style>
 *{margin:0px;padding:0px;}
@@ -39,6 +58,7 @@ html, body{
   font-family: Verdana;
   font-size: 13px;
   height: 100%;
+  background:#f5f6f5;
   }
 
 ul{
@@ -70,6 +90,24 @@ ul.list_nav li a{
 }
 
 ul.list_nav li a.v-link-active{  color:#ff4657; border-bottom:#ff4657 solid 2px;}
+
+
+.foot_menu{
+   position:fixed;
+   bottom:0px;
+   border-top:#d1d1d1 solid 1px;
+   display:flex;
+   width:100%;
+   background:#fff;
+}
+.foot_menu a{flex:1 ; display:inline-block}
+.foot_menu li{
+   flex:1
+}
+.foot_menu a li .menu_ico{ width:100%;height:40px;}
+.foot_menu a li .menu_name{ line-height:20px; font-size:12px; text-align:center }
+
+.foot_menu a.v-link-active li .menu_name{color:#ff4657}
 
 
 
