@@ -3,11 +3,7 @@
 </style>
 <template>
   <div class="overline flo">
-     <Modal v-bind:title="title"
-            v-bind:content="content"
-            v-bind:show="show"
-            v-bind:btn_arr="btn_arr">
-            </Modal>
+
 
      <ul class="overline flo list_nav">
           <li>  <a v-link="{ path: '/index/fav' }">fav</a>  </li>
@@ -16,6 +12,7 @@
 
      <button v-on:click="changeTitle()">Change Title</button>
      <button v-on:click="changeTitle2()">Change Title</button>
+     <button v-on:click="changeButton()"> changebuttons</button>
 
     <!-- main view -->
     <router-view>
@@ -25,28 +22,36 @@
 
 <script>
 
-import Modal from '../global/Modal.vue';
+
 
 export default {
-   components:{Modal},
-   data:function(){
-       return {
-          title:'标题1',
-          content:'弹窗内容1',
-          btn_array:[],
-          show:false
-       }
-   },
-   methods:{
-       changeTitle:function(){
-            this.title="Doline";
-
+      data:function(){
+          return {
+              dialog: {
+                                          title:'标题1',
+                                          content:'弹窗内容1',
+                                          btn_array:[],
+                                          show:true
+                            }
+          }
+      },
+       methods:{
+           changeButton:function(){
+              var that = this;
+              this.dialog.show = true;
+              this.dialog.btn_array = {
+                  cancelClick:function(){
+                      console.log("Hello world");
+                      that.dialog.show = false;
+                  },
+                  confirmClick:function(){
+                      console.log("sjjff");
+                  }
+              };
+              this.$dispatch("dialog_change_build" ,this.dialog);
+           }
        },
-       changeTitle2:function(){
-           console.log(Index);
-           Index.title="SMXC";
-       }
-   }
+
 }
 
 </script>

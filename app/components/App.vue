@@ -1,8 +1,8 @@
 <template>
   <div class="overline flo">
+
+      <Confirm v-bind:dialog="dialog"></Confirm>
       <!-- main view -->
-
-
       <router-view>
       </router-view>
 
@@ -35,10 +35,34 @@
 </template>
 
 <script>
+import Dialog from '../global/Dialog.vue';
+import Confirm from '../global/Confirm.vue';
+export default {
+    components:{Dialog , Confirm},
+       data:function(){
+           return {
+              message:'Hello world',
+              dialog: {
+                            title:'标题1',
+                            content:'弹窗内容1',
+                            btn_array:{},
+                            show:false
+              }
 
-
-
-
+           }
+       },
+       methods:{
+           changeMessage:function(){
+               console.log("changed message");
+               this.message = "changed message";
+           }
+       },
+       events:{
+           dialog_change_build:function( obj_dialog ){
+              this.dialog = obj_dialog;
+           }
+       }
+}
 </script>
 
 <style>

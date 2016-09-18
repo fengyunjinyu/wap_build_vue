@@ -1,6 +1,4 @@
 <template>
-
-
-Account Module
-
+    <router-view>
+    </router-view>
 </template>

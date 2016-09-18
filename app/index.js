@@ -6,6 +6,7 @@ import MyComponent from './components/my-component.vue';
 import App from './components/App.vue';
 import Login from './components/Login.vue';
 import Index from './components/Index.vue';
+import Account from './components/account/Index.vue'
 
 import build_resource from './lib/utils.js';
 import ExampleStore from './store/example.store.js';
@@ -13,12 +14,34 @@ import ExampleStore from './store/example.store.js';
 Vue.use(Router);
 Vue.use(VueResource);
 
+/**
+ * Vue 注册inteceptor 拦截器
+ * 所有请求均经过该拦截器
+ * @type {string}
+ */
+    Vue.http.interceptors.push(function( request , next){
+        //loading.show = true;
+
+        console.log("Hello");
+        next(function(response){
+            //loading.show = false;
+            console.log("JVSC");
+            return response;
+        });
+
+    });
+
+Vue.http.options.before = function(response){
+    console.log("before");
+    console.log(response);
+
+}
+
 
 var Baseurl = "http://localhost/wap_build_vue/data/";
-
 var Example = build_resource(Vue , Baseurl, ExampleStore);
 
-/*
+
 
 Example.foo({id:1}).then(
     function(response){
@@ -30,7 +53,6 @@ Example.foo({id:1}).then(
     }
 );
 
-*/
 
 
 
@@ -101,6 +123,18 @@ router.map({
                 component:MyComponent
             }
         }
+    },
+    '/account':{
+        component:Account,
+        subRoutes:{
+            "message":{
+                component: require("./components/account/Message.vue")
+            },
+            "":{
+                component: require("./components/account/Default.vue")
+            }
+        }
+
     }
 });
 
