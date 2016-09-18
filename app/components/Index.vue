@@ -21,9 +21,6 @@
 </template>
 
 <script>
-
-
-
 export default {
       data:function(){
           return {
@@ -41,7 +38,6 @@ export default {
               this.dialog.show = true;
               this.dialog.btn_array = {
                   cancelClick:function(){
-                      console.log("Hello world");
                       that.dialog.show = false;
                   },
                   confirmClick:function(){

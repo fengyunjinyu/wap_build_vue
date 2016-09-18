@@ -130,6 +130,15 @@ router.map({
             "message":{
                 component: require("./components/account/Message.vue")
             },
+            "article":{
+                component:require("./components/account/Article.vue")
+            },
+            "success" : {
+                component:require("./components/account/Success.vue")
+            },
+            "infos" :{
+                component:require("./components/account/Droptab.vue")
+            },
             "":{
                 component: require("./components/account/Default.vue")
             }
