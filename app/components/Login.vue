@@ -1,111 +1,98 @@
 <style>
-.mod_login{}
-.mod_login h1{
-   line-height:30px;
-   font-size:16px;
-   color:#585858;
-   width:100%;
-   float:left
-}
-.img_logo{
-    width:80px;
-    height:80px;
-    margin:0 auto;
-    background:#f4f4f4
-}
+
 
 </style>
 
 <template>
-<div class="overline flo pad_lr_15" style="padding-top:40px;">
-     <div class="mag_center img_logo" ></div>
-</div>
+<div class="cell">
+    <div class="hd">
 
-<div class="overline flo pad_lr_15 clearfid mod_login" style="padding-top:30px;">
+         <h1 class="page_title">用户登录</h1>
 
-    <h1>用户名{{ username }}</h1>
-    <input type="text" class="input_normal" v-model="username" placeholder="请输入用户名" />
-    <h1>密码</h1>
-    <input type="text" class="input_normal" v-model="password" placeholder="请输入密码" />
+         <div class="weui_cells weui_cells_form">
+                 <div class="weui_cell">
+                     <div class="weui_cell_hd"
+                     ><label class="weui_label">用户名</label></div>
+                     <div class="weui_cell_bd weui_cell_primary">
+                         <input class="weui_input"
+                         type="number"
+                         v-model="username"
+                         v-on:change="checkphone"  pattern="[0-9]*" placeholder="请输入手机号">
+                     </div>
+                 </div>
+                 <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
+                     <div class="weui_cell_bd weui_cell_primary">
+                         <input class="weui_input" type="password" v-model="password" placeholder="请输入密码">
+                     </div>
+                 </div>
 
-    <button class="btn_normal mag_t_15" v-on:click="submit">提交</button>
+         </div>
 
-
-
+          <div class="weui_btn_area">
+                 <a class="weui_btn weui_btn_normal" style="background:#ff4657"
+                 v-if="input_valid" href="javascript:" v-on:click="submit">登录</a>
+                 <a class="weui_btn weui_btn_normal" v-else href="javascript:" v-on:click="submit">登录</a>
+          </div>
+    </div>
 </div>
 </template>
 
 
 <script>
+import AccountService from "../store/account.service";
+import {Vue , Router , Resource} from '../lib/com.build';
 export default {
    data:function() {
+      this.$dispatch('footmenu_show' , false);
       return {
          msg:'Hello World',
          username:'storm',
-         password:''
+         password:'',
+         input_valid:false
       }
    },
 
    methods:{
-      update:function(){
-          console.log("Hello")
+      checkinput:function(){
+          var _this = this;
+          var username_res = /^1[0-9]{10}/.test(_this.username);
+          var pwd_res = /^(\d){6}$/.test(_this.password);
+          console.log("pwd+"+pwd_res);
+          if(username_res && pwd_res ){
+              _this.input_valid = true
+          }else{
+              _this.input_valid = false
+          }
+
       },
+
       submit:function(){
           var _this = this;
-          console.log("submit");
-          console.log(this.username);
-          console.log(this.password);
           var data = {
              username: _this.username,
              password:_this.password
-
           }
-
-          /*
-
-
-          Userstore.bar(
-             data ,
-          function(res){
-              if(res.status){
-                  console.log(res.data);
-                  //router.go("/");
+          AccountService.login(data).then(
+              function(response){
+                 console.log(response);
+                 //response.bodyText.promise();
+                 console.log(response.text());
+              },
+              function(response){
+                 console.log(response);
               }
-          },
-          function( err ){
-              console.warn(err);
-          }
           )
-
-          */
-
-          /*
-
-          Vue.http.post(
-             'http://localhost/data/user_login',
-             {
-                username:'haha',
-                password:'zhang'
-             }
-          ).then(function(res){
-             let data = JSON.parse(res.data);
-             if(data.success){
-
-             } else {
-               console.log(data.err_msg);
-             }
-          } ,function ( err ){
-          console.warn(err)
-          });
-
-          */
-
       },
       changename:function(){
 
       },
       changepwd:function(){
       }
+   },
+   watch:{
+      "username" : 'checkinput',
+      "password" : 'checkinput'
    }
 }
 </script>

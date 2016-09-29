@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>首页</title>
+    <link href="static/css/base.css" rel="stylesheet" type="text/css">
+    <link href="static/css/weui.css" rel="stylesheet" type="text/css">
+    <link href="static/css/example.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .pc_hd{
+            padding: 1rem;
+            line-height: 2.5rem;
+            border-bottom: #d1d1d1 solid 1px;
+        }
+        .pc_hd_title{
+            font-size: 1.5rem;
+            color: #848484;
+            float: left;
+        }
+        .pc_hd_nav{
+            float: right;
+        }
+
+        .clearfid:after{
+            content: '';
+            clear: both;
+            position: relative;
+            display: block;
+        }
+
+        .pc_cont{
+            position: relative;
+            padding: 1rem 0;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .pc_mobile_area{
+            width: 320px;
+            height:568px;
+            position: relative;
+            background: #fbf9fe;
+        }
+        .pc_mob_area{
+            border: 15px #d3d3d3 solid;
+            float: left;
+            position: relative;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="container" style="background: #ffffff">
+    <!--
+    <div class="pc_hd clearfid">
+        <p class="pc_hd_title">
+            MVWeb
+        </p>
+        <p class="pc_hd_nav">
+            使用指南
+        </p>
+    </div>
+
+    -->
+
+    <div class="pc_cont clearfid">
+
+        <div class="pc_mob_area">
+            <div class="pc_mobile_area clearfid container" id="app">
+
+                {{ message }}
+
+            </div>
+
+            <div class="weui_tabbar">
+                <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+                    <div class="weui_tabbar_icon">
+                        <img src="static/css/images/icon_nav_button.png" alt="">
+                    </div>
+                    <p class="weui_tabbar_label">微信</p>
+                </a>
+                <a href="javascript:;" class="weui_tabbar_item">
+                    <div class="weui_tabbar_icon">
+                        <img src="static/css/images/icon_nav_msg.png" alt="">
+                    </div>
+                    <p class="weui_tabbar_label">通讯录</p>
+                </a>
+                <a href="javascript:;" class="weui_tabbar_item">
+                    <div class="weui_tabbar_icon">
+                        <img src="static/css/images/icon_nav_article.png" alt="">
+                    </div>
+                    <p class="weui_tabbar_label">发现</p>
+                </a>
+                <a href="javascript:;" class="weui_tabbar_item">
+                    <div class="weui_tabbar_icon">
+                        <img src="static/css/images/icon_nav_cell.png" alt="">
+                    </div>
+                    <p class="weui_tabbar_label">我</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pc_hd clearfid" style="background: #f5f6f5;border-top: #d1d1d1 solid 1px">
+    <p class="pc_hd_title">
+        &copy;Tec:Lib_ico
+    </p>
+    <p class="pc_hd_nav">
+        风云
+    </p>
+</div>
+<script type="text/javascript" src="static/js/vue.min.js"></script>
+<script type="text/javascript">
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: "Hello worldJs"
+        }
+    });
+
+
+    Vue.component("footmenu" , {
+        template:'<span>{{ message }}</span>',
+        data:function(){
+            return {
+                msg :'not Updated'
+            }
+        },
+        methods: {
+            updateMessage:function(){
+                this.msg = "updated";
+                console.log(this.$el.textContent) // => 'not updated'
+                this.$nextTick(function(){
+                    console.log(this.$el.textContent) // => 'updated'
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

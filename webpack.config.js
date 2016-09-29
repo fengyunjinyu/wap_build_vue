@@ -23,7 +23,8 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel?presets=es2015',
                 exclude: /node_modules/
-            }
+            },
+            {test: /\.(jpg|png|svg)$/, loader: "url?limit=8192"},
         ]
     },
     plugins: [commonsPlugin]

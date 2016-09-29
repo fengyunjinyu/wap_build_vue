@@ -1,3 +1,6 @@
+<style>
+.weui_tabbar{ position:fixed}
+</style>
 <template>
    <div class="home">
    <div class="hd">
@@ -6,7 +9,7 @@
    </div>
    <div class="bd">
        <div class="weui_grids">
-           <a class="weui_grid" href="#/button">
+           <a class="weui_grid" v-link="{path:'account/message'}">
                <div class="weui_grid_icon">
                    <i class="icon icon_button"></i>
                </div>
@@ -14,7 +17,7 @@
                    Button
                </p>
            </a>
-           <a class="weui_grid" href="#/cell">
+           <a class="weui_grid" v-link="{path:'account/article'}">
                <div class="weui_grid_icon">
                    <i class="icon icon_cell"></i>
                </div>
@@ -22,7 +25,7 @@
                    Cell
                </p>
            </a>
-           <a class="weui_grid" href="#/toast">
+           <a class="weui_grid" v-link="{path:'account/success'}">
                <div class="weui_grid_icon">
                    <i class="icon icon_toast"></i>
                </div>
@@ -30,7 +33,7 @@
                    Toast
                </p>
            </a>
-           <a class="weui_grid" href="#/dialog">
+           <a class="weui_grid" v-link="{path:'account/toast'}">
                <div class="weui_grid_icon">
                    <i class="icon icon_dialog"></i>
                </div>
@@ -38,70 +41,24 @@
                    Dialog
                </p>
            </a>
-           <a class="weui_grid" href="#/progress">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_progress"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Progress
-               </p>
+           <a class="weui_grid" v-link="{path:'account/toast'}">
+                          <div class="weui_grid_icon">
+                              <i class="icon icon_dialog"></i>
+                          </div>
+                          <p class="weui_grid_label">
+                              Dialog
+                          </p>
            </a>
-           <a class="weui_grid" href="#/msg">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_msg"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Msg
-               </p>
+           <a class="weui_grid" v-link="{path:'account/toast'}">
+                          <div class="weui_grid_icon">
+                              <i class="icon icon_dialog"></i>
+                          </div>
+                          <p class="weui_grid_label">
+                              Dialog
+                          </p>
            </a>
-           <a class="weui_grid" href="#/article">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_article"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Article
-               </p>
-           </a>
-           <a class="weui_grid" href="#/actionsheet">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_actionSheet"></i>
-               </div>
-               <p class="weui_grid_label">
-                   ActionSheet
-               </p>
-           </a>
-           <a class="weui_grid" href="#/icons">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_icons"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Icons
-               </p>
-           </a>
-           <a class="weui_grid" href="#/panel">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_panel"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Panel
-               </p>
-           </a>
-           <a class="weui_grid" href="#/tab">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_tab"></i>
-               </div>
-               <p class="weui_grid_label">
-                   Tab
-               </p>
-           </a>
-           <a class="weui_grid" href="#/searchbar">
-               <div class="weui_grid_icon">
-                   <i class="icon icon_search_bar"></i>
-               </div>
-               <p class="weui_grid_label">
-                   SearchBar
-               </p>
-           </a>
+
+
        </div>
    </div>
    </div>

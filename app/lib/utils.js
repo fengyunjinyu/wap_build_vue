@@ -16,7 +16,7 @@
  var resource = Vue.resource('someItem{/id}', {}, customActions);
  */
 
-export default function ( Vue ,baseurl , module_object){
-    var resource = Vue.resource(baseurl+module_object.url ,{} , module_object.data);
+export function parseResource ( Vue , module_object){
+    var resource = Vue.resource(module_object.url ,{} , module_object.data);
     return resource;
 }

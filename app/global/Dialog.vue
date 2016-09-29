@@ -2,16 +2,13 @@
 
 </style>
 <template>
-<modal :show.sync='show'>
-    <div slot="title">{{dialog.title}}</div>
-    <div slot="content">{{dialog.content}}</div>
-    <div slot="buttons" class="weui_dialog_ft">
-        <a class="weui_btn_dialog primary" href="javascript:void(0);" v-on:click="onClick">确定</a>
-    </div>
-  </modal>
-
-
-
+    <modal :show.sync='show'>
+        <div slot="title">{{dialog.title}}</div>
+        <div slot="content">{{dialog.content}}</div>
+        <div slot="buttons" class="weui_dialog_ft">
+            <a class="weui_btn_dialog primary" href="javascript:void(0);" v-on:click="onClick">确定</a>
+        </div>
+    </modal>
 </template>
 
 <script>
