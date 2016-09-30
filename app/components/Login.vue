@@ -52,7 +52,6 @@ export default {
          input_valid:false
       }
    },
-
    methods:{
       checkinput:function(){
           var _this = this;
@@ -73,16 +72,16 @@ export default {
              username: _this.username,
              password:_this.password
           }
-          AccountService.login(data).then(
-              function(response){
-                 console.log(response);
-                 //response.bodyText.promise();
-                 console.log(response.text());
-              },
-              function(response){
-                 console.log(response);
-              }
-          )
+
+
+
+
+          Vue.http.get('http://localhost/wap_build_vue/data/login.json')
+                     .then(function( response ){
+                         console.log(response.body);
+                     },function(response){
+                         console.log(response);
+                     });
       },
       changename:function(){
 

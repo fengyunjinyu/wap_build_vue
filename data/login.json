@@ -1,7 +1,7 @@
 {
-   status:20000,
-   data:{
-       username:'fengyun',
-       accesstoken:'AccessToken'
+   "status":20000,
+   "data":{
+       "username":"fengyun",
+       "accesstoken":"AccessToken"
    }
 }

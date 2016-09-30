@@ -1,5 +1,5 @@
 /**
- * Vue ¹«¹²¼ÓÔØÆô¶¯Ïî
+ * Vue ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 import Vue from 'vue';
 import Router from 'vue-router';
@@ -12,10 +12,12 @@ Vue.use(Router);
 Vue.use(Resource);
 
 /**
- * Vue ×¢²áinteceptor À¹½ØÆ÷
- * ËùÓÐÇëÇó¾ù¾­¹ý¸ÃÀ¹½ØÆ÷
+ * Vue ×¢ï¿½ï¿½inteceptor ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @type {string}
  */
+
+/*
 Vue.http.interceptors.push(function( request , next){
     //loading.show = true;
     console.log("Hello");
@@ -31,6 +33,8 @@ Vue.http.options.before = function(response){
     console.log("before");
     console.log(response);
 };
+
+*/
 
 Vue.http.options.root="http://localhost/wap_build_vue/data/";
 
