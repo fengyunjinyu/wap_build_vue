@@ -17,13 +17,11 @@ Vue.use(Resource);
  * @type {string}
  */
 
-/*
+
 Vue.http.interceptors.push(function( request , next){
     //loading.show = true;
-    console.log("Hello");
     next(function(response){
         //loading.show = false;
-        console.log("JVSC");
         return response;
     });
 
@@ -34,8 +32,7 @@ Vue.http.options.before = function(response){
     console.log(response);
 };
 
-*/
 
-Vue.http.options.root="http://localhost/wap_build_vue/data/";
+Vue.http.options.root="http://localhost/wap_build_vue/data/"
 
 export {Vue , Router , Resource}

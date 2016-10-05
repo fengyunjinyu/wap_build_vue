@@ -1,12 +1,4 @@
-/*
-import Vue from 'Vue';
-import Router from 'vue-router';
-import VueResource from 'vue-resource';
-
-*/
-
 import {Vue , Router , Resource } from './lib/com.build.js';
-
 import App from './components/App.vue';
 import Login from './components/Login.vue';
 import Index from './components/Index.vue';
@@ -15,52 +7,7 @@ import Account from './components/account/Index.vue'
 import build_resource from './lib/utils.js';
 import ExampleStore from './store/example.store.js';
 
-
-/*
-Vue.use(Router);
-Vue.use(VueResource);
-
-/**
- * Vue 注册inteceptor 拦截器
- * 所有请求均经过该拦截器
- * @type {string}
- */
-/*
-    Vue.http.interceptors.push(function( request , next){
-        //loading.show = true;
-        console.log("Hello");
-        next(function(response){
-            //loading.show = false;
-            console.log("JVSC");
-            return response;
-        });
-
-    });
-
-Vue.http.options.before = function(response){
-    console.log("before");
-    console.log(response);
-};
-
-Vue.http.options.root="http://localhost/wap_build_vue/data/";
-
-
-
-var Example = build_resource(Vue , ExampleStore);
-
-Example.foo({id:1}).then(
-    function(response){
-        console.log("hello world");
-    },
-    function(response){
-        console.log('asjjd')
-
-    }
-);
-
-*/
-
-
+import Invest from "./components/invest/Index.vue";
 
 Vue.directive( 'banner' , {
     translate:{
@@ -85,7 +32,7 @@ Vue.directive( 'banner' , {
     },
     update:function(value , fn){
         this.el.innerHTML = "<div style='position:absolute;" +
-        "left:0;top:0;width: 900px;height:100px;background:#848484'>"+value+"</div>";
+        "left:0;top:0;width: 900px;height:150px;background:#848484;text-align:center'>"+value+"</div>";
         var self = this;
         self.tapObj = {};
     },
@@ -149,35 +96,11 @@ Vue.directive( 'banner' , {
 
 });
 
-
-var demo = new Vue({
-        ready: function () {
-                var customActions = {
-                    foo: {method: 'GET', url: 'someItem/foo{/id}'},
-                    bar: {method: 'POST', url: 'someItem/bar{/id}'}
-                };
-
-                var resource = this.$resource('someItem{/id}', {}, customActions);
-
-                // GET someItem/foo/1
-                resource.foo({id: 1}).then(function(response) {
-                    this.$set('item', response.json())
-                });
-
-                // POST someItem/bar/1
-                resource.bar({id: 1}, {item: this.item}).then(function(response) {
-                    // success callback
-                }, function(response){
-                    // error callback
-                });
-        }
-});
-
-
 var router = new Router();
+
 router.map({
     '/':{
-        component:Index
+        component:require("./components/Default.vue")
 
     },
     '/login':{
@@ -206,6 +129,20 @@ router.map({
             }
         }
 
+    },
+    '/invest':{
+        component:require("./components/invest/Index.vue"),
+        subRoutes:{
+            "":{
+                component:require("./components/invest/Default.vue")
+            },
+            "list":{
+                component:require("./components/invest/List.vue")
+            },
+            "withdraw":{
+                component:require("./components/invest/Withdraw.vue")
+            }
+        }
     }
 });
 router.start(App , "#app");

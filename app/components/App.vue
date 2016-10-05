@@ -2,6 +2,7 @@
   <div class="overline flo" style="height:100%">
 
       <Confirm v-bind:dialog="dialog"></Confirm>
+      <Loading v-if="loadingData"></Loading>
       <!-- main view -->
       <router-view>
       </router-view>
@@ -37,12 +38,15 @@
 </template>
 
 <script>
+import {Vue, Router} from "../lib/com.build.js";
 import Dialog from '../global/Dialog.vue';
 import Confirm from '../global/Confirm.vue';
+import Loading from "../global/Loading.vue";
 export default {
-    components:{Dialog , Confirm},
+    components:{Dialog , Confirm , Loading},
        data:function(){
            return {
+              loadingData:false,
               message:'Hello world',
               dialog: {
                             title:'标题1',
@@ -65,6 +69,9 @@ export default {
            },
            footmenu_show:function(val){
               this.footmenu_show = val;
+           },
+           loading_data:function(val){
+              this.loadingData = val;
            }
        }
 }

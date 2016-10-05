@@ -1,5 +1,5 @@
 /**
- * 用户操作 相关api
+ * Account store
  */
 import {Vue ,Router , Resource } from "../lib/com.build.js";
 import {parseResource} from "../lib/utils";

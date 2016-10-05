@@ -73,8 +73,18 @@ export default {
              password:_this.password
           }
 
+          AccountService.login(data).then(
+            function(response){
+               console.log(response);
+               //跳转到登录后的地址
+               _this.$router.go({path:'/account'});
+          } , function( error){
+               console.log(error);
+          })
 
 
+
+/*
 
           Vue.http.get('http://localhost/wap_build_vue/data/login.json')
                      .then(function( response ){
@@ -82,6 +92,8 @@ export default {
                      },function(response){
                          console.log(response);
                      });
+
+                     */
       },
       changename:function(){
 

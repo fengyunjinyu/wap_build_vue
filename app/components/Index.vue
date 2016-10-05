@@ -3,23 +3,13 @@
 </style>
 <template>
   <div class="overline flo">
-
-
-    <div v-banner="banners" style="width:100%;height:200px;background:#d1d1d1;position:relative">
-
-
+    <div v-banner="banners" style="width:100%;min-height:200px;background:#d1d1d1;position:relative">
     </div>
-
-
-
 
      <ul class="overline flo list_nav">
           <li>  <a v-link="{ path: '/index/fav' }">fav</a>  </li>
           <li> <a v-link="{ path: '/index/me' }">me</a>  </li>
      </ul>
-
-     <button v-on:click="changeTitle()">Change Title</button>
-     <button v-on:click="changeTitle2()">Change Title</button>
      <button v-on:click="changeButton()"> changebuttons</button>
 
     <!-- main view -->
@@ -68,7 +58,7 @@ export default {
            onSwipeLeft:function(){
               alert("move Left");
            }
-       },
+       }
 
 }
 
