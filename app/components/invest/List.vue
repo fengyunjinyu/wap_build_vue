@@ -25,10 +25,12 @@
      position:relative;
  }
  .we_debt_progress{
-     position:relative; width:100%;height:110px;
-     margin:0 auto;
+     position:absolute;
+     height:110px;
      width:150px;
-     margin:0 auto
+     left:50%;
+     margin-left:-75px;
+     top:0;
  }
  .we_debt_hd{
      position:relative
@@ -76,13 +78,12 @@
             <p class="debt_desc">{{ activeitem.buyStartTime || "0000-00-00 12:00" }}发售</p>
         </div>
 
-        <div class="we_debt_bd">
-            <div class="we_debt_progress" id="demos">
-                 <p class="debt_progress_rate">8.0%</p>
-            </div>
-
-            <div class="we_debt_svg" style="">
-                <div v-for="item in debtlist" id="{{item.moneyManageID}}" class="debt_svg">
+        <div class="we_debt_bd" style="width:1280px;">
+            <div class="we_debt_svg"  v-bind:style="transleft">
+                <div v-for="item in debtlist" id="{{item.moneyManageID}}" class="debt_svg" v-bind:style="win_width">
+                     <div class="we_debt_progress" id="demos">
+                          <p class="debt_progress_rate">{{item.yeaRate}}%</p>
+                     </div>
                 </div>
             </div>
 
@@ -115,14 +116,26 @@
                  </div>
              </div>
 
-             <p class="invest_desc" style="text-align:center;font-size:11px;color:#a8a8a8;padding:10px 0">
-                   你还有<span style="color:#ff4657;">1</span>次购买机会，单次购买上限为<span style="color:#ff4657;">50000</span>元
+             <p class="invest_desc" v-if="activeitem.productType == 3"  style="text-align:center;font-size:11px;color:#a8a8a8;padding:10px 0">
+                   你还有<span style="color:#ff4657;">{{activeitem.frequency}}</span>次购买机会，单次购买上限为<span style="color:#ff4657;">{{activeitem.limitMoney}}</span>元
+             </p>
+             <p class="invest_desc" v-if="activeitem.productType!=3" style="text-align:center;font-size:11px;color:#a8a8a8;padding:10px 0">
+                   万元日均收益为<span class="profitDay" style="color:#ff4657;">{{activeitem.rateIncom}}</span>元，同期银行活期为{{activeitem.bankRateIncom}}元
              </p>
         </div>
 
         <div class="we_debt_fdbtn">
-                <p class="weui_btn_area">
-                     <a class="weui_btn weui_btn_normal" v-on:click="withdraw">立即投资</a>
+                <p class="weui_btn_area" v-if="activeitem.state==3">
+                      <a class="weui_btn weui_btn_normal" style="background:#848484"
+                                          v-if="activeitem.flag">立即投资</a>
+                      <a class="weui_btn weui_btn_normal"
+                           v-else="!activeitem.flag" v-on:click="withdraw">立即投资</a>
+                </p>
+                <p class="weui_btn_area" v-if="activeitem.state==5">
+                     <a class="weui_btn weui_btn_normal" style="background:#848484">售罄</a>
+                </p>
+                <p class="weui_btn_area" v-if="activeitem.state==7">
+                     <a class="weui_btn weui_btn_normal" style="background:#848484">售罄</a>
                 </p>
         </div>
     </div>
@@ -145,13 +158,15 @@ export default {
                 _this.activeindex=0;
             } , 5000);
         },(response)=>{
-            cxonsole.log(response);
+            console.log(response);
         })
         return {
             debtlist:{},
             activeitem:{},
             activeindex:0,
-            svg_hd:[]
+            svg_hd:[],
+            transleft:'width:1280px;transform:translate(0,0);transition:transform 1s ease',
+            win_width:"width:320px"
         }
     },
     created:function(){
@@ -172,11 +187,17 @@ export default {
              console.log("投资");
         },
         selectedItem:function(attr_index){
+             var _this = this;
              console.log(attr_index);
              this.activeitem = this.debtlist[attr_index];
              this.activeindex = attr_index;
+             var trans_left = -320*attr_index;
+             this.transleft="width:1280px;transform:translate("+trans_left+"px,0);transition:transform 1s ease"
              this.svg_hd[attr_index].drawCircle();
-             this.svg_hd[attr_index].drawPath();
+             setTimeout(function(){
+                 _this.svg_hd[attr_index].drawPath();
+             } , 1000)
+
         },
         build_svg:function(){
              var _this = this;

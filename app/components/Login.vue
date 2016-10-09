@@ -11,14 +11,14 @@
 
          <div class="weui_cells weui_cells_form">
                  <div class="weui_cell">
-                     <div class="weui_cell_hd"
-                     ><label class="weui_label">用户名</label></div>
-                     <div class="weui_cell_bd weui_cell_primary">
-                         <input class="weui_input"
-                         type="number"
-                         v-model="username"
-                         v-on:change="checkphone"  pattern="[0-9]*" placeholder="请输入手机号">
-                     </div>
+                     <div class="weui_cell_hd">
+                         <label class="weui_label">用户名</label></div>
+                         <div class="weui_cell_bd weui_cell_primary">
+                             <input class="weui_input"
+                             type="number"
+                             v-model="username"
+                             v-on:change="checkphone"  placeholder="请输入手机号">
+                         </div>
                  </div>
                  <div class="weui_cell">
                      <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
@@ -29,10 +29,12 @@
 
          </div>
 
-          <div class="weui_btn_area">
+          <div class="weui_btn_area" style="padding-top:20px;">
                  <a class="weui_btn weui_btn_normal" style="background:#ff4657"
                  v-if="input_valid" href="javascript:" v-on:click="submit">登录</a>
-                 <a class="weui_btn weui_btn_normal" v-else href="javascript:" v-on:click="submit">登录</a>
+
+                 <a class="weui_btn weui_btn_normal" style="background:#c4c4c4" v-if="!input_valid"
+                 v-on:click="submit">登录</a>
           </div>
     </div>
 </div>
@@ -42,14 +44,15 @@
 <script>
 import AccountService from "../store/account.service";
 import {Vue , Router , Resource} from '../lib/com.build';
+import UserStore from "../lib/user_action";
 export default {
    data:function() {
       this.$dispatch('footmenu_show' , false);
       return {
-         msg:'Hello World',
-         username:'storm',
+         msg:'',
+         username:'',
          password:'',
-         input_valid:false
+         input_valid:true
       }
    },
    methods:{
@@ -73,27 +76,37 @@ export default {
              password:_this.password
           }
 
-          AccountService.login(data).then(
-            function(response){
-               console.log(response);
-               //跳转到登录后的地址
-               _this.$router.go({path:'/account'});
-          } , function( error){
-               console.log(error);
-          })
+          if(!/^1[3|4|5|7|8][0-9]{9}$/.test(_this.username)){
+              this.$dispatch("dialog_change_build" , {
+                   title:'提示',
+                   content:'手机号输入有误',
+                   show:true
+              });
+              return false;
+          }else{
+              if(!/^(\d){6}$/.test(_this.password)){
+                  this.$dispatch("dialog_change_build" , {
+                        title:'提示',
+                        content:'密码格式错误，请输入六位数字密码',
+                        show:true
+                  })
+                  return false;
+              }else{
+                  _this.$dispatch("loading_data" , true);
+                  AccountService.login(data).then(
+                              function(response){
+                                 _this.$dispatch("loading_data" , false);
+                                 console.log(response);
+                                 //跳转到登录后的地址
+                                 UserStore.doLoginResonse(response.body , _this);
+                                 //_this.$router.go({path:'/account'});
+                            } , function( error){
+                                 console.log(error);
+                            })
+              }
+          }
 
 
-
-/*
-
-          Vue.http.get('http://localhost/wap_build_vue/data/login.json')
-                     .then(function( response ){
-                         console.log(response.body);
-                     },function(response){
-                         console.log(response);
-                     });
-
-                     */
       },
       changename:function(){
 

@@ -1,7 +1,8 @@
 <template>
   <div class="overline flo" style="height:100%">
 
-      <Confirm v-bind:dialog="dialog"></Confirm>
+      <Confirm v-bind:dialog="confirm"></Confirm>
+      <Dialog v-bind:dialog="dialog"></Dialog>
       <Loading v-if="loadingData"></Loading>
       <!-- main view -->
       <router-view>
@@ -48,11 +49,17 @@ export default {
            return {
               loadingData:false,
               message:'Hello world',
+
               dialog: {
                             title:'标题1',
                             content:'弹窗内容1',
-                            btn_array:{},
                             show:false
+              },
+              confirm:{
+                  title:'title',
+                  content:'content',
+                  btn_array:{},
+                  show:false
               },
               footmenu_show:true
            }
@@ -66,6 +73,9 @@ export default {
        events:{
            dialog_change_build:function( obj_dialog ){
               this.dialog = obj_dialog;
+           },
+           confirm_change_build:function(obj_confirm){
+              this.confirm = obj_confirm;
            },
            footmenu_show:function(val){
               this.footmenu_show = val;

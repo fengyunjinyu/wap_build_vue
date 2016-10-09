@@ -2,7 +2,7 @@
 
 </style>
 <template>
-    <modal :show.sync='show'>
+    <modal v-show='dialog.show'>
         <div slot="title">{{dialog.title}}</div>
         <div slot="content">{{dialog.content}}</div>
         <div slot="buttons" class="weui_dialog_ft">
@@ -29,9 +29,8 @@ export default {
     },
     methods:{
         onClick:function(){
-            console.log("From Dialog vue events");
+            this.dialog.show = false;
         }
-
     },
 
     computed:{

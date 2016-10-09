@@ -1,7 +1,8 @@
 {
-   "status":20000,
+   "status":10000,
    "data":{
        "username":"fengyun",
        "accesstoken":"AccessToken"
-   }
+   },
+  "msg":"手机号已存在"
 }

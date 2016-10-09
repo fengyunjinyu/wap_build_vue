@@ -5,7 +5,7 @@
 <script>
 export default {
     data:function(){
-        this.dispatch("footmenu_show" , false);
+        this.$dispatch("footmenu_show" , false);
         return {};
     }
 }

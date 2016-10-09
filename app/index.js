@@ -1,4 +1,4 @@
-import {Vue , Router , Resource } from './lib/com.build.js';
+import {Vue , Router , Resource , router } from './lib/com.build.js';
 import App from './components/App.vue';
 import Login from './components/Login.vue';
 import Index from './components/Index.vue';
@@ -96,7 +96,6 @@ Vue.directive( 'banner' , {
 
 });
 
-var router = new Router();
 
 router.map({
     '/':{
@@ -146,3 +145,4 @@ router.map({
     }
 });
 router.start(App , "#app");
+
