@@ -7,8 +7,6 @@
       <!-- main view -->
       <router-view>
       </router-view>
-
-
       <!--  footer menu   -->
               <div class="weui_tabbar" v-show="footmenu_show">
                   <a v-link="{path:'message'}" class="weui_tabbar_item weui_bar_item_on">
@@ -39,6 +37,9 @@
 </template>
 
 <script>
+require("../css/weui.css");
+require("../css/base.css");
+require("../css/example.css");
 import {Vue, Router} from "../lib/com.build.js";
 import Dialog from '../global/Dialog.vue';
 import Confirm from '../global/Confirm.vue';
